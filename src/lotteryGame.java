@@ -72,7 +72,7 @@ public class lotteryGame {
         System.out.println("Welcome to the lottery game");
         System.out.println("Let's Go!");
         boolean gameLoop = true;
-        while (gameLoop == true) {
+        while (gameLoop) {
             try {
 
                 List<Integer> userNumbers = getUserNumbers();
@@ -93,19 +93,17 @@ public class lotteryGame {
             }
             finally {
                 boolean playAgain = true;
-                while (playAgain == true) {
+                while (playAgain) {
                     System.out.print("Would you like to play again? (Y/N) ");
                     Scanner input = new Scanner(System.in);
                     String replay = input.nextLine();
                     if (replay.equals("y") || replay.equals("Y")){
                         playAgain = false;
-                        continue;
                     } else if (replay.equals("N") || replay.equals("n")) {
                         playAgain = false;
                         gameLoop = false;
                     } else {
                         System.out.println("Please answer Y or N.");
-                        continue;
                     }
 
                 }
