@@ -22,11 +22,12 @@ public class lotteryGame {
     public static List<Integer> getUserNumbers(){
         List<Integer> userNumbers = new ArrayList<>(Collections.emptyList());
         int i = 1;
-        System.out.println("Enter your picks (1 to 50)");
+        System.out.println("Enter your lucky numbers (1 to 50)");
         do {
+            Scanner input = null;
             try {
                 System.out.printf("Pick number %s: ", i);
-                Scanner input = new Scanner(System.in);
+                input = new Scanner(System.in);
                 int a = input.nextInt();
                 if (a < 0 || a > 50) {
                     System.out.println("Your number should be between 1 and 50. Try again.");
@@ -34,8 +35,9 @@ public class lotteryGame {
                 }
                 userNumbers.add(a);
                 i++;
-            } catch (Exception e) {
-                throw new RuntimeException("Please enter a number.");
+            } catch (InputMismatchException type_error) {
+                System.out.println("That's not a number. Please enter a number.");
+                input.next();
             }
         } while (i <= 7);
 
@@ -67,21 +69,47 @@ public class lotteryGame {
     }
 
     public static void main(String[] args) {
+        System.out.println("Welcome to the lottery game");
+        System.out.println("Let's Go!");
+        boolean gameLoop = true;
+        while (gameLoop == true) {
+            try {
 
-        List<Integer> userNumbers = getUserNumbers();
-        //Select Seven random number without duplicate between 0 and 50
-        List<Integer> lotteryNumbers = getLotteryNumbers(7, 1, 50);
+                List<Integer> userNumbers = getUserNumbers();
+                //Select Seven random number without duplicate between 0 and 50
+                List<Integer> lotteryNumbers = getLotteryNumbers(7, 1, 50);
 
-        System.out.println(lotteryNumbers + " "); //For testing
+                System.out.println(lotteryNumbers + " "); //For testing
 
 
-        List<Integer> checkNumbers = checkLottoNumbers(userNumbers, lotteryNumbers);
+                List<Integer> checkNumbers = checkLottoNumbers(userNumbers, lotteryNumbers);
 
-        System.out.println(checkNumbers); //For testing
+                System.out.println(checkNumbers); //For testing
 
-        int rightAnswers = checkNumbers.size();
+                int rightAnswers = checkNumbers.size();
 
-        String payout = lottoWinnings(rightAnswers);
-        System.out.println(payout);
+                String payout = lottoWinnings(rightAnswers);
+                System.out.println(payout);
+            }
+            finally {
+                boolean playAgain = true;
+                while (playAgain == true) {
+                    System.out.print("Would you like to play again? (Y/N) ");
+                    Scanner input = new Scanner(System.in);
+                    String replay = input.nextLine();
+                    if (replay.equals("y") || replay.equals("Y")){
+                        playAgain = false;
+                        continue;
+                    } else if (replay.equals("N") || replay.equals("n")) {
+                        playAgain = false;
+                        gameLoop = false;
+                    } else {
+                        System.out.println("Please answer Y or N.");
+                        continue;
+                    }
+
+                }
+            }
+        }
     }
 }
