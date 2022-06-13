@@ -46,7 +46,7 @@ public class lotteryGame {
                 System.out.printf("Pick %s: ", i);
                 input = new Scanner(System.in);
                 int a = input.nextInt();
-                if (a < 0 || a > 50) {
+                if (a < 1 || a > 50) {
                     System.out.println("Your number should be between 1 and 50. Try again.");
                     continue;
                 }
