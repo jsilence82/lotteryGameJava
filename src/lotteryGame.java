@@ -1,6 +1,9 @@
 // A lottery game. It was originally written in Python. Written in Java as a learning exercise.
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.*;
+import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 public class lotteryGame {
@@ -87,8 +90,25 @@ public class lotteryGame {
     }
 
     public static void main(String[] args) {
-        System.out.println("Welcome to the lottery game");
-        System.out.println("Let's Go!");
+        // Generate ASCII art
+        BufferedImage image = new BufferedImage(144, 32, BufferedImage.TYPE_INT_RGB);
+        Graphics g = image.getGraphics();
+        g.setFont(new Font("Dialog", Font.PLAIN, 24));
+        Graphics2D graphics = (Graphics2D) g;
+        graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        graphics.drawString("LOTTERY", 6, 24);
+
+        for (int y = 0; y < 32; y++) {
+            StringBuilder sb = new StringBuilder();
+            for (int x = 0; x < 144; x++)
+                sb.append(image.getRGB(x, y) == -16777216 ? " " : image.getRGB(x, y) == -1 ? "#" : "*");
+            if (sb.toString().trim().isEmpty()) continue;
+            System.out.println(sb);
+        }
+
+        System.out.println("\nWelcome to the lottery game");
+        System.out.println("Good Luck!");
         boolean gameLoop = true;
         while (gameLoop) {
             try {
