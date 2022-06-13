@@ -1,11 +1,13 @@
+// A lottery game. It was originally written in Python. Written in Java as a learning exercise.
+
 import java.util.*;
 import static java.util.stream.Collectors.toList;
 
-
 public class lotteryGame {
-    //Get selected size number without duplicate
+    // Generates 7 random lotto numbers without duplicates. Prints "Drawing numbers" with time delay.
+    // Returns the winning lotto numbers as integer list.
     public static List<Integer> getLotteryNumbers(int size, int min, int max) {
-        ArrayList numbers = new ArrayList();
+        List<Integer> numbers = new ArrayList<>(Collections.emptyList());
         Random random = new Random();
         while (numbers.size() < size) {
             //Get Random numbers between range
@@ -15,37 +17,53 @@ public class lotteryGame {
                 numbers.add(randomNumber);
                 }
             }
-        Integer[] results = (Integer[]) numbers.toArray(new Integer[0]);
+        Integer[] results = numbers.toArray(new Integer[0]);
+
+        System.out.println("\nHere comes the winning lotto numbers....");
+        for (Integer number : numbers) {
+            try {
+                Thread.sleep(1000);
+                System.out.println("Drawing the number... " + number);
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+        }
         return List.of(results);
     }
 
     public static List<Integer> getUserNumbers(){
+        // Method to get the user numbers. With exceptions should user enter an invalid value or had already picked the
+        // number. Returns userNumbers as an integer list.
         List<Integer> userNumbers = new ArrayList<>(Collections.emptyList());
         int i = 1;
-        System.out.println("Enter your lucky numbers (1 to 50)");
+        System.out.println("\nEnter your lucky numbers (1 to 50)");
         do {
             Scanner input = null;
             try {
-                System.out.printf("Pick number %s: ", i);
+                System.out.printf("Pick %s: ", i);
                 input = new Scanner(System.in);
                 int a = input.nextInt();
                 if (a < 0 || a > 50) {
                     System.out.println("Your number should be between 1 and 50. Try again.");
                     continue;
                 }
+                if (userNumbers.contains(a)){
+                    System.out.println("You already picked that number. Try again.");
+                    continue;
+                }
                 userNumbers.add(a);
                 i++;
             } catch (InputMismatchException type_error) {
                 System.out.println("That's not a number. Please enter a number.");
+                assert input != null;
                 input.next();
             }
         } while (i <= 7);
-
-        System.out.println(userNumbers); //For testing only
-
         return userNumbers;
     }
+
     public static List<Integer> checkLottoNumbers(List<Integer> userNumbers, List<Integer> lotteryNumbers){
+        // Compares user entered numbers against the random numbers
         return userNumbers.stream().filter(lotteryNumbers::contains).collect(toList());
     }
 
@@ -74,27 +92,25 @@ public class lotteryGame {
         boolean gameLoop = true;
         while (gameLoop) {
             try {
-
+                // Setting Lists and variables-
                 List<Integer> userNumbers = getUserNumbers();
-                //Select Seven random number without duplicate between 0 and 50
                 List<Integer> lotteryNumbers = getLotteryNumbers(7, 1, 50);
-
-                System.out.println(lotteryNumbers + " "); //For testing
-
-
                 List<Integer> checkNumbers = checkLottoNumbers(userNumbers, lotteryNumbers);
-
-                System.out.println(checkNumbers); //For testing
-
                 int rightAnswers = checkNumbers.size();
-
                 String payout = lottoWinnings(rightAnswers);
+
+                // End game printout
+                System.out.println("\nThe lotto numbers: " + lotteryNumbers);
+                System.out.println("Your numbers: " + userNumbers);
+                System.out.println("\nYou hit the numbers: "+ checkNumbers);
+                System.out.println("\nYou guessed " + rightAnswers + " correctly.");
                 System.out.println(payout);
             }
             finally {
+                // While loop to ask if user would like to keep playing.
                 boolean playAgain = true;
                 while (playAgain) {
-                    System.out.print("Would you like to play again? (Y/N) ");
+                    System.out.print("\nWould you like to play again? (Y/N) ");
                     Scanner input = new Scanner(System.in);
                     String replay = input.nextLine();
                     if (replay.equals("y") || replay.equals("Y")){
@@ -105,7 +121,6 @@ public class lotteryGame {
                     } else {
                         System.out.println("Please answer Y or N.");
                     }
-
                 }
             }
         }
