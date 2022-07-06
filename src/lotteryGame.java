@@ -71,22 +71,16 @@ public class lotteryGame {
     }
 
     public static String lottoWinnings(int rightAnswers){
-        if (rightAnswers == 7){
-            return "You won $1,000,000!";
-        } else if (rightAnswers == 6) {
-            return "You won $50,000!";
-        } else if (rightAnswers == 5) {
-            return "You won $10,000!";
-        } else if (rightAnswers == 4) {
-            return "You won $5,000!";
-        } else if (rightAnswers == 3) {
-            return "You won $1,000!";
-        } else if (rightAnswers == 2) {
-            return "You won $500!";
-        } else if (rightAnswers == 1) {
-            return "You won $100!";
-        }else
-            return "Sorry you didn't win. Try again";
+        return switch (rightAnswers) {
+            case 1 -> "You won $100!";
+            case 2 -> "You won $500!";
+            case 3 -> "You won $1,000!";
+            case 4 -> "You won $5,000!";
+            case 5 -> "You won $10,000!";
+            case 6 -> "You won $50,000!";
+            case 7 -> "You won $1,000,000!";
+            default -> "Sorry you didn't win. Try again";
+        };
     }
 
     public static void main(String[] args) {
