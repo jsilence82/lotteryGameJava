@@ -2,11 +2,12 @@
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.*;
 import java.util.List;
+import java.util.*;
+
 import static java.util.stream.Collectors.toList;
 
-public class lotteryGame {
+public class LotteryGame {
     // Generates 7 random lotto numbers without duplicates. Prints "Drawing numbers" with time delay.
     // Returns the winning lotto numbers as integer list.
     public static List<Integer> getLotteryNumbers(int size, int min, int max) {
@@ -84,6 +85,7 @@ public class lotteryGame {
     }
 
     public static void main(String[] args) {
+
         // Generate ASCII art
         BufferedImage image = new BufferedImage(144, 32, BufferedImage.TYPE_INT_RGB);
         Graphics g = image.getGraphics();
@@ -100,6 +102,7 @@ public class lotteryGame {
             if (sb.toString().trim().isEmpty()) continue;
             System.out.println(sb);
         }
+
 
         System.out.println("\nWelcome to the lottery game");
         System.out.println("Good Luck!");
