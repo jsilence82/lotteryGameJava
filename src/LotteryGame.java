@@ -39,12 +39,12 @@ public class LotteryGame {
         // Method to get the user numbers. With exceptions should user enter an invalid value or had already picked the
         // number. Returns userNumbers as an integer list.
         List<Integer> userNumbers = new ArrayList<>(Collections.emptyList());
-        int i = 1;
+        int pickNumber = 1;
         System.out.println("\nEnter your lucky numbers (1 to 50)");
         do {
             Scanner input = null;
             try {
-                System.out.printf("Pick %s: ", i);
+                System.out.printf("Pick %s: ", pickNumber);
                 input = new Scanner(System.in);
                 int a = input.nextInt();
                 if (a < 1 || a > 50) {
@@ -56,13 +56,13 @@ public class LotteryGame {
                     continue;
                 }
                 userNumbers.add(a);
-                i++;
+                pickNumber++;
             } catch (InputMismatchException type_error) {
                 System.out.println("That's not a number. Please enter a number.");
                 assert input != null;
                 input.next();
             }
-        } while (i <= 7);
+        } while (pickNumber <= 7);
         return userNumbers;
     }
 
