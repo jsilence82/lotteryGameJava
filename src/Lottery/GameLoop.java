@@ -8,7 +8,7 @@ public class GameLoop {
     public GameLoop() {
         while (true) {
             try {
-                LotteryGame game = new LotteryGame();
+                Lottery game = new Lottery();
                 List<Integer> userNumbers = game.getUserNumbers();
                 List<Integer> lotteryNumbers = game.getLotteryNumbers();
                 List<Integer> checkNumbers = game.checkLottoNumbers(userNumbers, lotteryNumbers);

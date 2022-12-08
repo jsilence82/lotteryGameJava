@@ -5,7 +5,7 @@ import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
-public class LotteryGame {
+public class Lottery {
 
     public List<Integer> getLotteryNumbers() {
         List<Integer> numbers = new ArrayList<>();
