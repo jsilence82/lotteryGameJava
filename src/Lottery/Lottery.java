@@ -36,10 +36,9 @@ public class Lottery {
         int pickNumber = 1;
         System.out.println("\nEnter your lucky numbers (1 to 50)");
         do {
-            Scanner input = null;
+            Scanner input = new Scanner(System.in);
             try {
                 System.out.printf("Pick %s: ", pickNumber);
-                input = new Scanner(System.in);
                 int a = input.nextInt();
                 if (a < 1 || a > 50) {
                     System.out.println("Your number should be between 1 and 50. Try again.");
@@ -53,8 +52,6 @@ public class Lottery {
                 pickNumber++;
             } catch (InputMismatchException type_error) {
                 System.out.println("That's not a number. Please enter a number.");
-                assert input != null;
-                input.next();
             }
         } while (pickNumber <= 7);
         Collections.sort(userNumbers);

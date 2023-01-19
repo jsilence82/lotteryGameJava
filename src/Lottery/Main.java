@@ -1,6 +1,6 @@
 package Lottery;
 
-public class StartGame {
+public class Main {
 
     public static void main(String[] args) {
         new AsciiArt();

@@ -20,8 +20,10 @@ public class GameLoop {
                 System.out.println("\nYou hit the numbers: " + numbersToString(checkNumbers));
                 System.out.println("\nYou guessed " + rightAnswers + " correctly.");
                 System.out.println(payout);
+                break;
             } catch (Exception e) {
                 System.out.println("Oops! Something went wrong.");
+                e.printStackTrace();
             } finally {
                 boolean replayLoop = true;
                 while (replayLoop) {
